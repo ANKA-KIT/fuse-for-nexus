@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<filters>
+  <default_rules>  
+    <image>
+      <fsobject_type>FOLDER</fsobject_type>
+      <extension>.tif</extension>
+      <colorscheme>MINISBLACK</colorscheme>
+      <bit>16</bit>
+    </image>
+    
+    <table_csv>
+      <fsobject_type>FILE</fsobject_type>
+      <precision>%5.3f</precision>
+      <extension>.csv</extension>
+      <separator>,</separator>
+    </table_csv>
+  </default_rules>
+  <specific_rules>
+    <object>
+      <path>/entry/sample</path>
+      <fsobject_type>FILE</fsobject_type>
+      <extension>.csv</extension>
+	<mode>table_csv</mode>
+	<table_csv>
+	  <column_count>4</column_count>
+	  <column1>
+	    <title>rotation angle</title>
+	    <content>
+	      <path>./rotation_angle</path>
+	    </content>
+	  </column1>
+	  <column2>
+	    <title>X</title>
+	    <content>
+	      <path>./x_translation</path>
+	    </content>
+	  </column2>
+	  <column3>
+	    <title>Y</title>
+	    <content>
+	      <path>./y_translation</path>
+	    </content>
+	  </column3>
+	  <column4>
+	    <title>Z</title>
+	    <content>
+	      <path>./z_translation</path>
+	    </content>
+	  </column4>
+	  <column_order>
+	    <column1>2</column1>
+	    <column2>3</column2>
+	    <column3>4</column3>
+	    <column4>1</column4>
+	  </column_order>
+	</table_csv>
+    </object>
+    
+    <object>
+      <path>/instrument/sample/data</path>
+      <fsobject_type>FOLDER</fsobject_type>
+	<mode>image</mode>
+	<image>
+	  <extension>.tif</extension>
+	  <colorscheme>PHOTOMETRIC_MINISBLACK</colorscheme>
+	  <bit>16</bit>
+	</image>
+    </object>
+    
+  </specific_rules>
+</filters>

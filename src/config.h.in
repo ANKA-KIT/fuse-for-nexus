@@ -1,0 +1,14 @@
+/*
+ * config.h
+ *
+ *  Created on: May 23, 2013
+ *      Author: iurchenko
+ */
+
+#ifndef CONFIG_H_
+#define CONFIG_H_
+
+#define RULES_XMLFILE_PATH "${CMAKE_INSTALL_PREFIX}/share/NXFS/rules.xml"
+
+
+#endif /* CONFIG_H_ */

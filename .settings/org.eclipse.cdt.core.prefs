@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1605329399/PKG_CONFIG_PATH/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1605329399/PKG_CONFIG_PATH/operation=append
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1605329399/PKG_CONFIG_PATH/value=/usr/lib/pkgconfig/
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1605329399/append=true
+environment/project/cdt.managedbuild.config.gnu.exe.debug.1605329399/appendContributed=true

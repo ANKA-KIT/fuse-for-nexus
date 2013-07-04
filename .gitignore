@@ -1,0 +1,27 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+#temporary stuff
+*.txt~
+*.swp
+*.*~
+
+#build
+build_dir/
+Debug
+nfs.log
+fuse_log.log
+src/config.h
+NXFS.log
+doc/
