@@ -44,18 +44,18 @@ ImageRule::ImageRule() : photometric_values({
 		 {"2", PHOTOMETRIC_RGB},
 		 {"4", PHOTOMETRIC_MASK}
 		}), imageRuleReadField({
-		 {TypeID::UINT8, &ImageRule::readNXFieldUInt8},
-		 {TypeID::UINT16, &ImageRule::readNXFieldUInt16},
-		 {TypeID::UINT32, &ImageRule::readNXFieldUInt32},
-		 {TypeID::FLOAT32, &ImageRule::readNXFieldFloat32},
-		 {TypeID::FLOAT64, &ImageRule::readNXFieldFloat64},
-		 {TypeID::FLOAT128, &ImageRule::readNXFieldFloat128},
-		 {TypeID::INT8, &ImageRule::readNXFieldInt8},
-		 {TypeID::INT16, &ImageRule::readNXFieldInt16},
-		 {TypeID::INT32, &ImageRule::readNXFieldInt32},
-		 {TypeID::COMPLEX32, &ImageRule::readNXFieldComplex32},
-		 {TypeID::COMPLEX64, &ImageRule::readNXFieldComplex64},
-		 {TypeID::COMPLEX128, &ImageRule::readNXFieldComplex128}
+		 {type_id_t::UINT8, &ImageRule::readNXFieldUInt8},
+		 {type_id_t::UINT16, &ImageRule::readNXFieldUInt16},
+		 {type_id_t::UINT32, &ImageRule::readNXFieldUInt32},
+		 {type_id_t::FLOAT32, &ImageRule::readNXFieldFloat32},
+		 {type_id_t::FLOAT64, &ImageRule::readNXFieldFloat64},
+		 {type_id_t::FLOAT128, &ImageRule::readNXFieldFloat128},
+		 {type_id_t::INT8, &ImageRule::readNXFieldInt8},
+		 {type_id_t::INT16, &ImageRule::readNXFieldInt16},
+		 {type_id_t::INT32, &ImageRule::readNXFieldInt32},
+		 {type_id_t::COMPLEX32, &ImageRule::readNXFieldComplex32},
+		 {type_id_t::COMPLEX64, &ImageRule::readNXFieldComplex64},
+		 {type_id_t::COMPLEX128, &ImageRule::readNXFieldComplex128}
 		})
 {
 	type = RuleType::IMAGE;
@@ -80,64 +80,64 @@ ImageRule::~ImageRule() {
  *	To get data from \a nxfield we need to know the type of data stored. But we have only TypeID of data type. \n
  *	So this function calls readNXFieldImageRule<T>(pninx::NXField&) with right template parameter.
  */
-std::string ImageRule::readNXFieldUInt8 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldUInt8 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<UInt8>(nxfield);
+	return readNXFieldImageRule<uint8>(nxfield);
 }
 
-std::string ImageRule::readNXFieldUInt16 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldUInt16 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<UInt16>(nxfield);
+	return readNXFieldImageRule<uint16>(nxfield);
 }
 
-std::string ImageRule::readNXFieldUInt32 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldUInt32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<UInt32>(nxfield);
+	return readNXFieldImageRule<uint32>(nxfield);
 }
 
-std::string ImageRule::readNXFieldInt8 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldInt8 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Int8>(nxfield);
+	return readNXFieldImageRule<int8>(nxfield);
 }
 
-std::string ImageRule::readNXFieldInt16 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldInt16 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Int16>(nxfield);
+	return readNXFieldImageRule<int16>(nxfield);
 }
 
-std::string ImageRule::readNXFieldInt32 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldInt32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Int32>(nxfield);
+	return readNXFieldImageRule<int32>(nxfield);
 }
 
-std::string ImageRule::readNXFieldFloat32 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldFloat32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Float32>(nxfield);
+	return readNXFieldImageRule<float32>(nxfield);
 }
 
-std::string ImageRule::readNXFieldFloat64 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldFloat64 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Float64>(nxfield);
+	return readNXFieldImageRule<float64>(nxfield);
 }
 
-std::string ImageRule::readNXFieldFloat128 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldFloat128 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Float128>(nxfield);
+	return readNXFieldImageRule<float128>(nxfield);
 }
 
-std::string ImageRule::readNXFieldComplex32 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldComplex32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Complex32>(nxfield);
+	return readNXFieldImageRule<complex32>(nxfield);
 }
 
-std::string ImageRule::readNXFieldComplex64 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldComplex64 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Complex64>(nxfield);
+	return readNXFieldImageRule<complex64>(nxfield);
 }
 
-std::string ImageRule::readNXFieldComplex128 (pninx::NXField& nxfield)
+std::string ImageRule::readNXFieldComplex128 (pninx::nxfield& nxfield)
 {
-	return readNXFieldImageRule<Complex128>(nxfield);
+	return readNXFieldImageRule<complex128>(nxfield);
 }
 ///@}
 
@@ -149,17 +149,17 @@ std::string ImageRule::readNXFieldComplex128 (pninx::NXField& nxfield)
  *	Takes the data from NeXus object in accordance with the value type of stored information.\n
  *	Handles the data in accordance with ImageRule#options.
  */
-std::string ImageRule::read(pninx::NXObject &nxobject)
+std::string ImageRule::read(pninx::nxobject &nxobject)
 {
 	std::string output;
 
-	if(nxobject.object_type() == pni::nx::NXObjectType::NXFIELD)
+	if(nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD)
 	{
-		auto readField_iterator = imageRuleReadField.find( ( (pninx::NXField) nxobject ).type_id() );
+		auto readField_iterator = imageRuleReadField.find( ( (pninx::nxfield) nxobject ).type_id() );
 		if(readField_iterator != imageRuleReadField.end() )
 		{
 			getImageRuleContent_t read_func = readField_iterator->second;
-			pninx::NXField nxfield = (pninx::NXField) nxobject;
+			pninx::nxfield nxfield = (pninx::nxfield) nxobject;
 			output = (this->*read_func)( nxfield );
 		}else
 			output = "An error occurred, see log file \n";//todo log error
@@ -172,7 +172,7 @@ std::string ImageRule::read(pninx::NXObject &nxobject)
 	return output;
 }
 
-/*std::vector<std::string> ImageRule::readdir(pninx::NXObject &nxobject)
+/*std::vector<std::string> ImageRule::readdir(pninx::nxobject &nxobject)
 {
 	std::vector<std::string> output;
 	return output;
@@ -184,9 +184,9 @@ std::string ImageRule::read(pninx::NXObject &nxobject)
  *	\return Size of representaion of \a nxobject.
  *
  */
-size_t ImageRule::size(pninx::NXObject &nxobject)
+size_t ImageRule::size(pninx::nxobject &nxobject)
 {
-	shape_t volume = ( (pninx::NXField) nxobject ).shape<shape_t>();
+	shape_t volume = ( (pninx::nxfield) nxobject ).shape<shape_t>();
 	uint8_t bit = 32;
 	auto bit_it = this->options.find("bit");
 	if( bit_it != this->options.end() )
@@ -204,7 +204,7 @@ size_t ImageRule::size(pninx::NXObject &nxobject)
  *	\param [in] nxobject : NeXus object to get type from.
  *	\return FSType of representaion of \a nxobject.
  */
-FSType ImageRule::getattr(pninx::NXObject &nxobject)
+FSType ImageRule::getattr(pninx::nxobject &nxobject)
 {
 	return FSType::FILE;
 }
@@ -214,13 +214,13 @@ FSType ImageRule::getattr(pninx::NXObject &nxobject)
  *	\param [in] nxobject : NeXus object which has to be a folder with subfiles.
  *	\return Number of subfiles, and extension for them.
  */
-subFiles ImageRule::createSubFiles(pninx::NXObject &nxobject)
+subFiles ImageRule::createSubFiles(pninx::nxobject &nxobject)
 {
 	subFiles output;
 
-	if(nxobject.object_type() == pni::nx::NXObjectType::NXFIELD)
+	if(nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD)
 	{
-		pninx::NXField nxfield = (pninx::NXField)nxobject;
+		pninx::nxfield nxfield = (pninx::nxfield)nxobject;
 
 		int rank = nxfield.rank();
 		if(rank == 3)
