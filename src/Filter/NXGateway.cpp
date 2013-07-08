@@ -22,12 +22,13 @@
 
 #include "NXGateway.h"
 
-pninx::NXFile NXGateway::_nxfile;
+pninx::nxfile NXGateway::_nxfile;
 
 NXGateway::NXGateway() {
 }
 
-NXGateway::~NXGateway() {
+NXGateway::~NXGateway() 
+{
 	if(_nxfile.is_valid())
 		_nxfile.close();
 }
@@ -38,7 +39,7 @@ NXGateway::~NXGateway() {
  * 	\return NXObject
  * 	\throw NXFSException if nxobject is not found
  */
-pninx::NXObject NXGateway::getNXObjectByPath(const char* nxpath)
+pninx::nxobject NXGateway::getNXObjectByPath(const char* nxpath)
 {
 	if( !_nxfile.is_valid() )
 		throw NXFSException("NXGateway: Nexus file is not valid");
@@ -60,7 +61,7 @@ void NXGateway::load_file(const char* nxfile_path)
 	{
 		try
 		{
-			_nxfile = pninx::NXFile::open_file(nxfile_path, true);
+			_nxfile = pninx::nxfile::open_file(nxfile_path, true);
 		}catch (...) {
 			throw NXFSException("cannot open NeXus file");
 		}
