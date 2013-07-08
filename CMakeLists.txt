@@ -16,7 +16,7 @@ endif()
 
 FIND_PACKAGE( PkgConfig REQUIRED)
 pkg_check_modules ( FUSE fuse REQUIRED)
-pkg_check_modules ( NX pninx REQUIRED)
+pkg_check_modules ( NX pniio REQUIRED)
 FIND_PACKAGE(TIFF REQUIRED)
 message("TIFF libraries are "${TIFF_LIBRARIES})
 
