@@ -94,7 +94,7 @@ FSType FSObject::getattr()
 	FSType ret = FSType::NONE;
 	if(this->rule != NULL)
 	{
-		pninx::NXObject nx = NXGateway::getNXObjectByPath( this->_nxobjectpath.c_str() );
+		pninx::nxobject nx = NXGateway::getNXObjectByPath( this->_nxobjectpath.c_str() );
 		try
 		{
 			//the truth is out there

@@ -24,39 +24,39 @@
 #include "../ErrorLog.h"
 
 Rule::Rule() : ruleReadField({
-	{TypeID::UINT8, &Rule::readNXFieldUInt8},
-	{TypeID::UINT16, &Rule::readNXFieldUInt16},
-	{TypeID::UINT32, &Rule::readNXFieldUInt32},
-	{TypeID::INT8, &Rule::readNXFieldInt8},
-	{TypeID::INT16, &Rule::readNXFieldInt16},
-	{TypeID::INT32, &Rule::readNXFieldInt32},
-	{TypeID::FLOAT32, &Rule::readNXFieldFloat32},
-	{TypeID::FLOAT64, &Rule::readNXFieldFloat64},
-	{TypeID::FLOAT128, &Rule::readNXFieldFloat128},
-	{TypeID::COMPLEX32, &Rule::readNXFieldComplex32},
-	{TypeID::COMPLEX64, &Rule::readNXFieldComplex64},
-	{TypeID::COMPLEX128, &Rule::readNXFieldComplex128},
-	{TypeID::STRING, &Rule::readNXFieldString},
-	{TypeID::BINARY, &Rule::readNXFieldBinary},
-	{TypeID::BOOL, &Rule::readNXFieldBoolean},
-	{TypeID::NONE, &Rule::readNXFieldBinary}
+	{type_id_t::UINT8, &Rule::readNXFieldUInt8},
+	{type_id_t::UINT16, &Rule::readNXFieldUInt16},
+	{type_id_t::UINT32, &Rule::readNXFieldUInt32},
+	{type_id_t::INT8, &Rule::readNXFieldInt8},
+	{type_id_t::INT16, &Rule::readNXFieldInt16},
+	{type_id_t::INT32, &Rule::readNXFieldInt32},
+	{type_id_t::FLOAT32, &Rule::readNXFieldFloat32},
+	{type_id_t::FLOAT64, &Rule::readNXFieldFloat64},
+	{type_id_t::FLOAT128, &Rule::readNXFieldFloat128},
+	{type_id_t::COMPLEX32, &Rule::readNXFieldComplex32},
+	{type_id_t::COMPLEX64, &Rule::readNXFieldComplex64},
+	{type_id_t::COMPLEX128, &Rule::readNXFieldComplex128},
+	{type_id_t::STRING, &Rule::readNXFieldString},
+	{type_id_t::BINARY, &Rule::readNXFieldBinary},
+	{type_id_t::BOOL, &Rule::readNXFieldBoolean},
+	{type_id_t::NONE, &Rule::readNXFieldBinary}
 }), types_size({
-	{TypeID::UINT8, 7},
-	{TypeID::INT8, 4},
-	{TypeID::UINT16, 18},
-	{TypeID::INT16, 13},
-	{TypeID::UINT32, 41},
-	{TypeID::INT32, 30},
-	{TypeID::FLOAT32, 52},
-	{TypeID::FLOAT64, 64},
-	{TypeID::FLOAT128, 77},
-	{TypeID::COMPLEX32, 82},
-	{TypeID::COMPLEX64, 87},
-	{TypeID::COMPLEX128, 92},
-	{TypeID::STRING, 2048},
-	{TypeID::BINARY, 8},
-	{TypeID::BOOL, 1},
-	{TypeID::NONE, 8}
+	{type_id_t::UINT8, 7},
+	{type_id_t::INT8, 4},
+	{type_id_t::UINT16, 18},
+	{type_id_t::INT16, 13},
+	{type_id_t::UINT32, 41},
+	{type_id_t::INT32, 30},
+	{type_id_t::FLOAT32, 52},
+	{type_id_t::FLOAT64, 64},
+	{type_id_t::FLOAT128, 77},
+	{type_id_t::COMPLEX32, 82},
+	{type_id_t::COMPLEX64, 87},
+	{type_id_t::COMPLEX128, 92},
+	{type_id_t::STRING, 2048},
+	{type_id_t::BINARY, 8},
+	{type_id_t::BOOL, 1},
+	{type_id_t::NONE, 8}
 })
 {
 	type = RuleType::PLAINDATA;
@@ -77,77 +77,77 @@ Rule::~Rule() {}
  *	To get data from \a nxfield we need to know the type of data stored. But we have only TypeID of data type. \n
  *	So this function calls readNXFieldRule<T>(pninx::NXField&) with right template parameter.
  */
-std::string Rule::readNXFieldInt8 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldInt8 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Int8>(nxfield);
+	return readNXFieldRule<int8>(nxfield);
 }
 
-std::string Rule::readNXFieldInt16 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldInt16 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Int16>(nxfield);
+	return readNXFieldRule<int16>(nxfield);
 }
 
-std::string Rule::readNXFieldInt32 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldInt32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Int32>(nxfield);
+	return readNXFieldRule<int32>(nxfield);
 }
 
-std::string Rule::readNXFieldUInt8 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldUInt8 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<UInt8>(nxfield);
+	return readNXFieldRule<uint8>(nxfield);
 }
 
-std::string Rule::readNXFieldUInt16 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldUInt16 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<UInt16>(nxfield);
+	return readNXFieldRule<uint16>(nxfield);
 }
 
-std::string Rule::readNXFieldUInt32 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldUInt32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<UInt32>(nxfield);
+	return readNXFieldRule<uint32>(nxfield);
 }
 
-std::string Rule::readNXFieldFloat32 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldFloat32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Float32>(nxfield);
+	return readNXFieldRule<float32>(nxfield);
 }
 
-std::string Rule::readNXFieldFloat64 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldFloat64 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Float64>(nxfield);
+	return readNXFieldRule<float64>(nxfield);
 }
 
-std::string Rule::readNXFieldFloat128 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldFloat128 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Float128>(nxfield);
+	return readNXFieldRule<float128>(nxfield);
 }
 
-std::string Rule::readNXFieldComplex32 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldComplex32 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Complex32>(nxfield);
+	return readNXFieldRule<complex32>(nxfield);
 }
-std::string Rule::readNXFieldComplex64 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldComplex64 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Complex64>(nxfield);
+	return readNXFieldRule<complex64>(nxfield);
 }
-std::string Rule::readNXFieldComplex128 (pninx::NXField& nxfield)
+std::string Rule::readNXFieldComplex128 (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Complex128>(nxfield);
-}
-
-std::string Rule::readNXFieldString (pninx::NXField& nxfield)
-{
-	return readNXFieldRule<String>(nxfield);
+	return readNXFieldRule<complex128>(nxfield);
 }
 
-std::string Rule::readNXFieldBinary (pninx::NXField& nxfield)
+std::string Rule::readNXFieldString (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Binary>(nxfield);
+	return readNXFieldRule<string>(nxfield);
 }
 
-std::string Rule::readNXFieldBoolean (pninx::NXField& nxfield)
+std::string Rule::readNXFieldBinary (pninx::nxfield& nxfield)
 {
-	return readNXFieldRule<Bool>(nxfield);
+	return readNXFieldRule<binary>(nxfield);
+}
+
+std::string Rule::readNXFieldBoolean (pninx::nxfield& nxfield)
+{
+	return readNXFieldRule<bool>(nxfield);
 }
 ///@}
 
@@ -168,21 +168,22 @@ void Rule::addOption(std::string key, std::string value)
  *
  *	The representation of NeXus object depends on it's value type and on Rule#options that are set.
  */
-std::string Rule::read(pninx::NXObject& nxobject)
+std::string Rule::read(pninx::nxobject& nxobject)
 {
 	std::string str;
-	if(nxobject.object_type() == pni::nx::NXObjectType::NXFIELD)
+	if(nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD)
 	{
-		auto readField_iterator = ruleReadField.find( ( ( pninx::NXField) nxobject ).type_id() );
+		auto readField_iterator = ruleReadField.find( ( ( pninx::nxfield) nxobject ).type_id() );
 		if(readField_iterator != ruleReadField.end() )
 		{
 			readNXField_t read_func = readField_iterator->second;
-			pninx::NXField nxfield = (pninx::NXField) nxobject;
+			pninx::nxfield nxfield = (pninx::nxfield) nxobject;
 			str = (this->*read_func)( nxfield );
 		}else
 		{
 			str = "An error occurred, see log file \n";
-			ErrorLog::log_write("NXObject %s has unknown array value type: %d", nxobject.path().c_str(), ( ( pninx::NXField) nxobject ).type_id() );
+			ErrorLog::log_write("NXObject %s has unknown array value type: %d",
+                    nxobject.path().c_str(), ( ( pninx::nxfield) nxobject ).type_id() );
 		}
 	}
 	return str;
@@ -193,7 +194,7 @@ std::string Rule::read(pninx::NXObject& nxobject)
  *	\param [in] nxobject : NeXus object that has to be represented as an object of filesytem.
  *	\return The type of filesystem object.
  */
-FSType Rule::getattr(pninx::NXObject& nxobject)
+FSType Rule::getattr(pninx::nxobject& nxobject)
 {
 	std::map<std::string,std::string>::iterator option_fstype = options.find("fsobject_type");
 
@@ -204,7 +205,7 @@ FSType Rule::getattr(pninx::NXObject& nxobject)
 	}
 	else
 	{
-		if( nxobject.object_type() == pni::nx::NXObjectType::NXGROUP )
+		if( nxobject.object_type() == pni::io::nx::nxobject_type::NXGROUP )
 			return FSType::FOLDER;
 		else
 			return FSType::FILE;
@@ -232,17 +233,17 @@ FSType Rule::getattr(pninx::NXObject& nxobject)
  *	\param [in] nxobject : The NeXus object that has to be represented.
  *	\return The size of representation.
  */
-size_t Rule::size(pninx::NXObject& nxobject)
+size_t Rule::size(pninx::nxobject& nxobject)
 {
 	size_t sz =0;
-	if(nxobject.object_type() == pni::nx::NXObjectType::NXFIELD)
+	if(nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD)
 	{
-		sz = ((pninx::NXField)nxobject).size();
+		sz = ((pninx::nxfield)nxobject).size();
 
 		//we trying to guess how much characters may be in file
 		//so we check what type of values and how many entities of these values we have
 		//then just multiply amount of entities on max number of characters for this value type
-		auto type = ((pninx::NXField)nxobject).type_id();
+		auto type = ((pninx::nxfield)nxobject).type_id();
 		auto entity_size_it = types_size.find(type);
 		if(entity_size_it != types_size.end())
 		{
@@ -289,7 +290,7 @@ void Rule::setOptions(std::map<std::string, std::string> input)
  *	\param [in] nxobject : NeXus object.
  *	\return valid or not subFile structure.
  */
-subFiles Rule::createSubFiles(pninx::NXObject &nxobject)
+subFiles Rule::createSubFiles(pninx::nxobject &nxobject)
 {
 	subFiles output;
 	std::string err_msg = "Cannot create subfiles for ";
