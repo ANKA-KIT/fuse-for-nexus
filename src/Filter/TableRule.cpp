@@ -29,22 +29,22 @@ char* TableRule::separator;
  *	Default constructor of TableRule
  */
 TableRule::TableRule() : tableRuleReadField({
-	{TypeID::UINT8, &TableRule::readNXFieldUInt8},
-	{TypeID::UINT16, &TableRule::readNXFieldUInt16},
-	{TypeID::UINT32, &TableRule::readNXFieldUInt32},
-	{TypeID::INT8, &TableRule::readNXFieldInt8},
-	{TypeID::INT16, &TableRule::readNXFieldInt16},
-	{TypeID::INT32, &TableRule::readNXFieldInt32},
-	{TypeID::FLOAT32, &TableRule::readNXFieldFloat32},
-	{TypeID::FLOAT64, &TableRule::readNXFieldFloat64},
-	{TypeID::FLOAT128, &TableRule::readNXFieldFloat128},
-	{TypeID::COMPLEX32, &TableRule::readNXFieldComplex32},
-	{TypeID::COMPLEX64, &TableRule::readNXFieldComplex64},
-	{TypeID::COMPLEX128, &TableRule::readNXFieldComplex128},
-	{TypeID::STRING, &TableRule::readNXFieldString},
-	{TypeID::BINARY, &TableRule::readNXFieldBinary},
-	{TypeID::BOOL, &TableRule::readNXFieldBoolean},
-	{TypeID::NONE, &TableRule::readNXFieldBinary}
+	{type_id_t::UINT8, &TableRule::readNXFieldUInt8},
+	{type_id_t::UINT16, &TableRule::readNXFieldUInt16},
+	{type_id_t::UINT32, &TableRule::readNXFieldUInt32},
+	{type_id_t::INT8, &TableRule::readNXFieldInt8},
+	{type_id_t::INT16, &TableRule::readNXFieldInt16},
+	{type_id_t::INT32, &TableRule::readNXFieldInt32},
+	{type_id_t::FLOAT32, &TableRule::readNXFieldFloat32},
+	{type_id_t::FLOAT64, &TableRule::readNXFieldFloat64},
+	{type_id_t::FLOAT128, &TableRule::readNXFieldFloat128},
+	{type_id_t::COMPLEX32, &TableRule::readNXFieldComplex32},
+	{type_id_t::COMPLEX64, &TableRule::readNXFieldComplex64},
+	{type_id_t::COMPLEX128, &TableRule::readNXFieldComplex128},
+	{type_id_t::STRING, &TableRule::readNXFieldString},
+	{type_id_t::BINARY, &TableRule::readNXFieldBinary},
+	{type_id_t::BOOL, &TableRule::readNXFieldBoolean},
+	{type_id_t::NONE, &TableRule::readNXFieldBinary}
 })
 {
 	type = RuleType::TABLE2D;
@@ -68,69 +68,69 @@ TableRule::~TableRule() {
  *	To get data from \a nxfield we need to know the type of data stored. But we have only TypeID of data type. \n
  *	So this function calls readColumnContent<T>(pninx::NXField&, const int) with right template parameter.
  */
-std::vector<std::string> TableRule::readNXFieldInt8 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldInt8 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Int8>(nxfield, precision);
+	return readColumnContent<int8>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldInt16 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldInt16 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Int16>(nxfield, precision);
+	return readColumnContent<int16>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldInt32 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldInt32 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Int32>(nxfield, precision);
+	return readColumnContent<int32>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldUInt8 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldUInt8 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<UInt8>(nxfield, precision);
+	return readColumnContent<uint8>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldUInt16 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldUInt16 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<UInt16>(nxfield, precision);
+	return readColumnContent<uint16>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldUInt32 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldUInt32 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<UInt32>(nxfield, precision);
+	return readColumnContent<uint32>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldFloat32 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldFloat32 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Float32>(nxfield, precision);
+	return readColumnContent<float32>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldFloat64 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldFloat64 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Float64>(nxfield, precision);
+	return readColumnContent<float64>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldFloat128 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldFloat128 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Float128>(nxfield, precision);
+	return readColumnContent<float128>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldComplex32 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldComplex32 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Complex32>(nxfield, precision);
+	return readColumnContent<complex32>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldComplex64 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldComplex64 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Complex64>(nxfield, precision);
+	return readColumnContent<complex64>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldComplex128 (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldComplex128 (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Complex128>(nxfield, precision);
+	return readColumnContent<complex128>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldString (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldString (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<String>(nxfield, precision);
+	return readColumnContent<string>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldBinary (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldBinary (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Binary>(nxfield, precision);
+	return readColumnContent<binary>(nxfield, precision);
 }
-std::vector<std::string> TableRule::readNXFieldBoolean (pninx::NXField& nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldBoolean (pninx::nxfield& nxfield, const int precision)
 {
-	return readColumnContent<Bool>(nxfield, precision);
+	return readColumnContent<bool>(nxfield, precision);
 }
 ///@}
 
-FSType TableRule::getattr(pninx::NXObject &nxobject)
+FSType TableRule::getattr(pninx::nxobject &nxobject)
 {
 	return FSType::FILE;
 }
@@ -146,7 +146,7 @@ FSType TableRule::getattr(pninx::NXObject &nxobject)
  *	\param [in] precision : The decimal precision to be used to format floating-point values.
  *	\return NeXus field data as a vector of strings.
  */
-std::vector<std::string> TableRule::readNXFieldAsVector(pninx::NXField &nxfield, const int precision)
+std::vector<std::string> TableRule::readNXFieldAsVector(pninx::nxfield &nxfield, const int precision)
 {
 	std::vector<std::string> output;
 
@@ -191,7 +191,7 @@ std::vector<std::vector<std::string>> TableRule::divideVectorIntoTable(std::vect
  *	\param [in] nxfield : NeXus field that has to be represented.
  *	\return String representation, ready to be stored as a file content.
  */
-std::string TableRule::getTableNXFieldContent(pninx::NXField& nxfield)
+std::string TableRule::getTableNXFieldContent(pninx::nxfield& nxfield)
 {
 	size_t nxfield_rank = nxfield.rank();
 	shape_t nxfield_shape = nxfield.shape<shape_t>();
@@ -250,7 +250,7 @@ std::string TableRule::getTableNXFieldContent(pninx::NXField& nxfield)
  * 	This function provides the representation of NXObject data based on XML options.
  *  It is called when FUSE called read function.
  */
-std::string TableRule::read(pninx::NXObject &nxobject)
+std::string TableRule::read(pninx::nxobject &nxobject)
 {
 	std::string output;
 	auto sep_it = this->options.find("separator");
@@ -263,16 +263,16 @@ std::string TableRule::read(pninx::NXObject &nxobject)
 		separator = const_cast<char*>(",");
 	}
 
-	if(nxobject.object_type() == pni::nx::NXObjectType::NXFIELD)
+	if(nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD)
 	{
-		pninx::NXField nxfield = (pninx::NXField) nxobject;
+		pninx::nxfield nxfield = (pninx::nxfield) nxobject;
 		output = getTableNXFieldContent(nxfield);
 	}
 	else
 	{
-		if(nxobject.object_type() == pni::nx::NXObjectType::NXGROUP)
+		if(nxobject.object_type() == pni::io::nx::nxobject_type::NXGROUP)
 		{
-			pninx::NXGroup nxgroup = (pninx::NXGroup)nxobject;
+			pninx::nxgroup nxgroup = (pninx::nxgroup)nxobject;
 			output = getTableNXGroupContent( nxgroup );
 		}
 		else
@@ -287,18 +287,18 @@ std::string TableRule::read(pninx::NXObject &nxobject)
 /** This function provides the size of file.
  *  It is called when FUSE called getattr function.
  */
-size_t TableRule::size(pninx::NXObject &nxobject)
+size_t TableRule::size(pninx::nxobject &nxobject)
 {
 	size_t output=0;
-	if(nxobject.object_type() == pni::nx::NXObjectType::NXFIELD)
+	if(nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD)
 	{
-		output = ( ( pninx::NXField ) nxobject).size();
+		output = ( ( pninx::nxfield ) nxobject).size();
 		//todo think how many characters there will be
 		output *= 2;
 	}
 	else
 	{
-		pninx::NXGroup nxgroup = (pninx::NXGroup)nxobject;
+		pninx::nxgroup nxgroup = (pninx::nxgroup)nxobject;
 		output = getSizeOfNXGroupTable(nxgroup);
 	}
 	return output;
@@ -309,7 +309,7 @@ size_t TableRule::size(pninx::NXObject &nxobject)
  *	\param [in] nxgroup : NeXus group that has to be represented.
  *	\return The size of file in bytes that will require to store the representation of this NeXus group.
  */
-size_t TableRule::getSizeOfNXGroupTable(pninx::NXGroup& nxgroup)
+size_t TableRule::getSizeOfNXGroupTable(pninx::nxgroup& nxgroup)
 {
 	size_t output = 0;
 	size_t column_count = 0;
@@ -359,21 +359,21 @@ size_t TableRule::getSizeOfNXGroupTable(pninx::NXGroup& nxgroup)
  *	\param [in] path : relative path of NXField within the NXGroup.
  *	\return The size in bytes that will require to store the column in file.
  */
-size_t TableRule::getSizeOfColumn(pninx::NXGroup& nxgroup, const char* path)
+size_t TableRule::getSizeOfColumn(pninx::nxgroup& nxgroup, const char* path)
 {
 	size_t output = 0;
-	pninx::NXObject nxcolumn;
+	pninx::nxobject nxcolumn;
 	try{
 		nxcolumn = nxgroup[path];
-	}catch (Exception& e) {
+	}catch (exception& e) {
 		return 0;
 	}
-	if(nxcolumn.object_type() == pni::nx::NXObjectType::NXFIELD)
-		output = ( (pninx::NXField) nxcolumn).size();
+	if(nxcolumn.object_type() == pni::io::nx::nxobject_type::NXFIELD)
+		output = ( (pninx::nxfield) nxcolumn).size();
 	else
 		output = 0;
 	//todo think how many characters there will be
-	size_t multiplier = this->types_size.find(( (pninx::NXField) nxcolumn).type_id())->second;
+	size_t multiplier = this->types_size.find(( (pninx::nxfield) nxcolumn).type_id())->second;
 	output *= multiplier;
 	return output;
 }
@@ -384,13 +384,13 @@ size_t TableRule::getSizeOfColumn(pninx::NXGroup& nxgroup, const char* path)
  *	\param [in] path : relative path of NXField that should be represented as a column.
  *	\return The data from NXField as a vector of strings, where each data item from NXField is one string in vector.
  */
-std::vector<std::string> TableRule::getColumnContent(pninx::NXGroup& nxgroup, const char* path)
+std::vector<std::string> TableRule::getColumnContent(pninx::nxgroup& nxgroup, const char* path)
 {
 	std::vector<std::string> output;
-	pninx::NXObject nxcolumn;
+	pninx::nxobject nxcolumn;
 	try{
 		nxcolumn = nxgroup[path];
-	}catch (Exception& e) {
+	}catch (exception& e) {
 		std::string err_output = "Wrong column path - ";
 		err_output += path;
 		ErrorLog::log_xml_error_msg( err_output.c_str(),
@@ -413,9 +413,9 @@ std::vector<std::string> TableRule::getColumnContent(pninx::NXGroup& nxgroup, co
 			precision = 0;
 	}
 
-	if( nxcolumn.object_type() == pni::nx::NXObjectType::NXFIELD )
+	if( nxcolumn.object_type() == pni::io::nx::nxobject_type::NXFIELD )
 	{
-		pninx::NXField nxfield = ( (pninx::NXField) nxcolumn );
+		pninx::nxfield nxfield = ( (pninx::nxfield) nxcolumn );
 		output = readNXFieldAsVector( nxfield, precision );
 	}
 	else
@@ -525,7 +525,7 @@ void TableRule::validateColumnsOrder(size_t* order, size_t column_count, std::ve
  *	\param [in] nxgroup : NeXus group that has to be represented.
  *	\return the representation that ready to be stored as a file content.
  */
-std::string TableRule::getTableNXGroupContent(pninx::NXGroup& nxgroup)
+std::string TableRule::getTableNXGroupContent(pninx::nxgroup& nxgroup)
 {
 	std::vector<std::vector<std::string>> output;
 	//defaults
