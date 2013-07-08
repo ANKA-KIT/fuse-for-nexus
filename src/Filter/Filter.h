@@ -24,8 +24,8 @@
 #define FILTER_H_
 
 #include <stdio.h>
-#include <pni/utils/Types.hpp>
-#include <pni/nx/NX.hpp>
+#include <pni/core/types.hpp>
+#include <pni/io/nx/nx.hpp>
 #include <errno.h>
 #include "FSTree.h"
 #include "XMLFile.h"
@@ -36,7 +36,7 @@
 #include "NXFSCache.h"
 #include "../config.h"
 
-namespace pninx=pni::nx::h5;
+namespace pninx=pni::io::nx::h5;
 
 /**
  *	It manages the other components, such as FSTree (Filter#_nxtree), XMLFile (Filter#_xmlfile), NXGateway (Filter#_nxgate), NXFSCache (Filter#_cache).
@@ -48,14 +48,14 @@ private:
 	static NXGateway _nxgate;
 	static NXFSCache* _cache;
 
-	void addRootGroup( pninx::NXGroup& nxgroup );
-	void addGroup( pninx::NXGroup nxgroup, FSObject& fsparent );
+	void addRootGroup( pninx::nxgroup& nxgroup );
+	void addGroup( pninx::nxgroup nxgroup, FSObject& fsparent );
 
-	Rule* createHardcodedBehavior( pninx::NXObject &nxobject );
-	void tryCreateDefaultBehavior( Rule* &behaviour, pninx::NXObject &nxobject );
-	void tryCreateSpecificBehavior(Rule* &behaviour, pninx::NXObject& nxobject, FSObject& fsobj);
-	void createBehavior( FSObject &fsobj, pninx::NXObject &nxobject );
-	void createSubFiles(Rule* behaviour, pninx::NXObject& nxobj,  FSObject& parent);
+	Rule* createHardcodedBehavior( pninx::nxobject &nxobject );
+	void tryCreateDefaultBehavior( Rule* &behaviour, pninx::nxobject &nxobject );
+	void tryCreateSpecificBehavior(Rule* &behaviour, pninx::nxobject& nxobject, FSObject& fsobj);
+	void createBehavior( FSObject &fsobj, pninx::nxobject &nxobject );
+	void createSubFiles(Rule* behaviour, pninx::nxobject& nxobj,  FSObject& parent);
 
 	static FSObject& fsobjectAt( const char* path );
 

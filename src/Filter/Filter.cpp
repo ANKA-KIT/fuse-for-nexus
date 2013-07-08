@@ -116,9 +116,9 @@ Filter::~Filter() {
  * \param [in] nxgroup : NeXus group
  * \param [in] fsparent : parent FSObject folder
  */
-void Filter::addGroup(pninx::NXGroup nxgroup, FSObject& fsparent)
+void Filter::addGroup(pninx::nxgroup nxgroup, FSObject& fsparent)
 {
-	for(pninx::NXObject &nxobject : nxgroup)
+	for(pninx::nxobject &nxobject : nxgroup)
 	{
 		FSObject fsobj;
 
@@ -139,7 +139,7 @@ void Filter::addGroup(pninx::NXGroup nxgroup, FSObject& fsparent)
 		fsobj = _nxtree.last();
 
 		//todo think how to check further browsing
-		if( nxobject.object_type() == pni::nx::NXObjectType::NXGROUP )
+		if( nxobject.object_type() == pni::io::nx::nxobject_type::NXGROUP )
 		{
 			addGroup(nxobject, fsobj);
 		}
@@ -150,9 +150,9 @@ void Filter::addGroup(pninx::NXGroup nxgroup, FSObject& fsparent)
  * \brief Creates and inserts FSObject for all NXObjects in root NXGroup.
  * \param [in] nxgroup : NeXus group
  */
-void Filter::addRootGroup(pninx::NXGroup& nxgroup)
+void Filter::addRootGroup(pninx::nxgroup& nxgroup)
 {
-	for(pninx::NXObject &nxobject : nxgroup)
+	for(pninx::nxobject &nxobject : nxgroup)
 	{
 		FSObject fsobj;
 
@@ -171,7 +171,7 @@ void Filter::addRootGroup(pninx::NXGroup& nxgroup)
 
 		//if( fsobj.Behaviour->getattr(nxobject) == FSType::FOLDER )
 		//todo: think how to do it better. if there is some group that should be displayed as a file
-		if( nxobject.object_type() == pni::nx::NXObjectType::NXGROUP )
+		if( nxobject.object_type() == pni::io::nx::nxobject_type::NXGROUP )
 		{
 			addGroup(nxobject, fsobj);
 		}
@@ -184,7 +184,7 @@ void Filter::addRootGroup(pninx::NXGroup& nxgroup)
  * \param [in] parent : parent FSObject of files that will be created.
  * \param [in] behaviour : Rule to be applied to files.
  */
-void Filter::createSubFiles(Rule* behaviour, pninx::NXObject& nxobj,  FSObject& parent)
+void Filter::createSubFiles(Rule* behaviour, pninx::nxobject& nxobj,  FSObject& parent)
 {
 	/*
 	 * algorythm:
@@ -231,12 +231,12 @@ void Filter::createSubFiles(Rule* behaviour, pninx::NXObject& nxobj,  FSObject& 
  * \param [in] nxobject : NeXus object to which Rule will be applied to.
  * \return Created Rule.
  */
-Rule* Filter::createHardcodedBehavior(pninx::NXObject &nxobject)
+Rule* Filter::createHardcodedBehavior(pninx::nxobject &nxobject)
 {
 	Rule* behavior = new Rule();
 
 	//default hardcoded rule
-	FSType obj_type = (nxobject.object_type() == pni::nx::NXObjectType::NXFIELD) ? FSType::FILE : FSType::FOLDER;
+	FSType obj_type = (nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD) ? FSType::FILE : FSType::FOLDER;
 	std::string obj_type_str = (obj_type == FSType::FILE) ? "FILE" : "FOLDER";
 	behavior->addOption("fsobject_type", obj_type_str);
 
@@ -252,7 +252,7 @@ Rule* Filter::createHardcodedBehavior(pninx::NXObject &nxobject)
  * \param [in] nxobject : NeXus object to which Rule will be applied to.
  * \param [out] behavior : if default Rule found, then behavior is default Rule, else it's the same.
  */
-void Filter::tryCreateDefaultBehavior(Rule* &behavior, pninx::NXObject &nxobject)
+void Filter::tryCreateDefaultBehavior(Rule* &behavior, pninx::nxobject &nxobject)
 {
 	std::string rule_name;
 	for( auto attr = nxobject.attr_begin(); attr != nxobject.attr_end(); attr++ )
@@ -284,7 +284,7 @@ void Filter::tryCreateDefaultBehavior(Rule* &behavior, pninx::NXObject &nxobject
  * \param [out] behavior : if specific Rule found, then behavior is default Rule, else it's the same.
  * \param [out] fsobj : may be changed, e.g. added subfiles for this FSObject, it depends on Rule implementation.
  */
-void Filter::tryCreateSpecificBehavior(Rule* &behavior, pninx::NXObject& nxobject, FSObject& fsobj)
+void Filter::tryCreateSpecificBehavior(Rule* &behavior, pninx::nxobject& nxobject, FSObject& fsobj)
 {
 	std::string specificRuleName;
 	if( !( ( specificRuleName = _xmlfile.findSpecificRule( nxobject.path().c_str() ) ).empty() ) )
@@ -342,7 +342,7 @@ void Filter::tryCreateSpecificBehavior(Rule* &behavior, pninx::NXObject& nxobjec
  *	\param [out] fsobj : changes name and fullpath if there are such options in fsobj.rule.
  *	\param [in] nxobject : NXObject the Rule created for.
  */
-void Filter::createBehavior(FSObject &fsobj, pninx::NXObject &nxobject)
+void Filter::createBehavior(FSObject &fsobj, pninx::nxobject &nxobject)
 {
 	Rule* behavior = createHardcodedBehavior(nxobject);
 	tryCreateDefaultBehavior(behavior, nxobject);
@@ -367,7 +367,7 @@ void Filter::createBehavior(FSObject &fsobj, pninx::NXObject &nxobject)
  */
 void Filter::createTree()
 {
-	pninx::NXGroup root_group = _nxgate.getNXObjectByPath("/");
+	pninx::nxgroup root_group = _nxgate.getNXObjectByPath("/");
 
 	Rule* behaviuor = new Rule();
 	behaviuor->addOption("fsobject_type", "FOLDER");

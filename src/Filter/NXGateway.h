@@ -23,20 +23,20 @@
 #ifndef NXGATEWAY_H_
 #define NXGATEWAY_H_
 
-#include <pni/nx/NX.hpp>
+#include <pni/io/nx/nx.hpp>
 #include "NXFSException.h"
 
-namespace pninx=pni::nx::h5;
+namespace pninx=pni::io::nx::h5;
 
 class NXGateway {
 private:
-	static pninx::NXFile _nxfile;
+	static pninx::nxfile _nxfile;
 public:
 	NXGateway();
 	virtual ~NXGateway();
 	static void load_file(const char* nxfile_path);
 
-	static pninx::NXObject getNXObjectByPath(const char* nxpath);
+	static pninx::nxobject getNXObjectByPath(const char* nxpath);
 };
 
 #endif /* NXGATEWAY_H_ */

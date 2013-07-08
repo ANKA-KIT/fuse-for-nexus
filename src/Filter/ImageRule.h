@@ -31,8 +31,8 @@
 #include "TIFFProvider.h"
 #include "NXFSException.h"
 #include "NXGateway.h"
-#include <pni/nx/NX.hpp>
-#include <pni/utils/Types.hpp>
+#include <pni/io/nx/nx.hpp>
+#include <pni/core/types.hpp>
 
 /**
  *	Class handles the representation of the NeXus data and creates TIFFs from it.
@@ -42,13 +42,13 @@ private:
 	/**
 	 *	Typedef pointer to function to store functions in a map.
 	 */
-	typedef std::string (ImageRule::*getImageRuleContent_t) (pninx::NXField& nxfield);
+	typedef std::string (ImageRule::*getImageRuleContent_t) (pninx::nxfield& nxfield);
 
 	const std::map<std::string, char> photometric_values; /*!< list of supported photometric values from XML file. Key is an expected value from XML file, and value is correct value that will be written in TIFF tags. */
 	/**
 	 *	This map is designed to call correct template function, due to the fact that we know the type we need to pass into template in runtime only.
 	 */
-	const std::map<TypeID, getImageRuleContent_t> imageRuleReadField;
+	const std::map<type_id_t, getImageRuleContent_t> imageRuleReadField;
 
 
 	/**
@@ -62,7 +62,7 @@ private:
 	 *	And writes the TIFF file into memory.
 	 */
 	template<typename T>
-	std::string readNXFieldImageRule (pninx::NXField& nxfield)
+	std::string readNXFieldImageRule (pninx::nxfield& nxfield)
 	{
 		int bit = 32;
 		int colormetric = PHOTOMETRIC_MINISBLACK;
@@ -100,8 +100,8 @@ private:
 		size_t width = nxfield.shape<shape_t>()[1];
 		size_t height = nxfield.shape<shape_t>()[2];
 
-		DArray<T> data( shape_t{ width, height } );
-		nxfield( part_num ,Slice( 0, width ), Slice( 0, height ) ).read( data );
+		darray<T> data( shape_t{ width, height } );
+		nxfield( part_num ,slice( 0, width ), slice( 0, height ) ).read( data );
 
 		// rotate array %)
 		/*T content[width][height];
@@ -117,31 +117,31 @@ private:
 		return outputTIFF.str();
 	}
 
-	virtual std::string readNXFieldInt8 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldInt16 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldInt32 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldUInt8 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldUInt16 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldUInt32 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldFloat32 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldFloat64 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldFloat128 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldComplex32 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldComplex64 (pninx::NXField& nxfield);
-	virtual std::string readNXFieldComplex128 (pninx::NXField& nxfield);
+	virtual std::string readNXFieldInt8 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldInt16 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldInt32 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldUInt8 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldUInt16 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldUInt32 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldFloat32 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldFloat64 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldFloat128 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldComplex32 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldComplex64 (pninx::nxfield& nxfield);
+	virtual std::string readNXFieldComplex128 (pninx::nxfield& nxfield);
 
 public:
 	ImageRule();
 	virtual ~ImageRule();
 
-	virtual subFiles createSubFiles(pninx::NXObject &nxobject);
+	virtual subFiles createSubFiles(pninx::nxobject &nxobject);
 
 
 	//fuse methods
-	virtual FSType getattr(pninx::NXObject &nxobject);
+	virtual FSType getattr(pninx::nxobject &nxobject);
 	//virtual std::vector<std::string> readdir(pninx::NXObject &nxobject);
-	virtual std::string read(pninx::NXObject &nxobject);
-	virtual size_t size(pninx::NXObject &nxobject);
+	virtual std::string read(pninx::nxobject &nxobject);
+	virtual size_t size(pninx::nxobject &nxobject);
 };
 
 #endif /* IMAGERULE_H_ */

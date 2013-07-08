@@ -26,8 +26,8 @@
 #include "enums.h"
 #include "Rule.h"
 #include "NXGateway.h"
-#include <pni/nx/NX.hpp>
-#include <pni/utils/Types.hpp>
+#include <pni/io/nx/nx.hpp>
+#include <pni/core/types.hpp>
 #include "NXFSException.h"
 #include <sstream>
 #include <tiffio.h>
@@ -46,39 +46,39 @@ private:
 	/**
 	 *	Typedef pointer to function to store functions in a map.
 	 */
-	typedef std::vector<std::string> (TableRule::*getTableRuleContent_t) (pninx::NXField& nxfield, const int precision);
+	typedef std::vector<std::string> (TableRule::*getTableRuleContent_t) (pninx::nxfield& nxfield, const int precision);
 	/**
 	 *	This map is designed to call correct template function, due to the fact that we know the type we need to pass into template in runtime only.
 	 */
-	const std::map<TypeID, getTableRuleContent_t> tableRuleReadField;
+	const std::map<type_id_t, getTableRuleContent_t> tableRuleReadField;
 
-	std::vector<std::string> readNXFieldInt8 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldInt16 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldInt32 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldUInt8 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldUInt16 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldUInt32 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldFloat32 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldFloat64 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldFloat128 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldComplex32 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldComplex64 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldComplex128 (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldString (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldBinary (pninx::NXField& nxfield, const int precision);
-	std::vector<std::string> readNXFieldBoolean (pninx::NXField& nxfield, const int precision);
+	std::vector<std::string> readNXFieldInt8 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldInt16 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldInt32 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldUInt8 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldUInt16 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldUInt32 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldFloat32 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldFloat64 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldFloat128 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldComplex32 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldComplex64 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldComplex128 (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldString (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldBinary (pninx::nxfield& nxfield, const int precision);
+	std::vector<std::string> readNXFieldBoolean (pninx::nxfield& nxfield, const int precision);
 
-	std::vector<std::string> readNXFieldAsVector(pninx::NXField &nxfield, const int precision);
-	std::string getTableNXGroupContent(pninx::NXGroup& nxgroup);
-	std::vector<std::string> getColumnContent(pninx::NXGroup& nxgroup, const char* path);
+	std::vector<std::string> readNXFieldAsVector(pninx::nxfield &nxfield, const int precision);
+	std::string getTableNXGroupContent(pninx::nxgroup& nxgroup);
+	std::vector<std::string> getColumnContent(pninx::nxgroup& nxgroup, const char* path);
 	void setColumnPosition(size_t column_num, size_t* order, std::vector<size_t>& columnsWithoutOrder);
-	size_t getSizeOfColumn(pninx::NXGroup& nxgroup, const char* path);
+	size_t getSizeOfColumn(pninx::nxgroup& nxgroup, const char* path);
 	void validateColumnsOrder(size_t* order, size_t column_count, std::vector<size_t>& columnsWithoutOrder);
 	std::vector<std::string> getTitles(size_t column_count, const char* nxgroup_path);
 	std::string writeTableToStream(size_t column_count, size_t* columns_order,
 			std::vector<std::string>& column_titles, std::vector<std::vector<std::string>> table_data, size_t max_column_length);
-	size_t getSizeOfNXGroupTable(pninx::NXGroup& nxgroup);
-	std::string getTableNXFieldContent(pninx::NXField& nxfield);
+	size_t getSizeOfNXGroupTable(pninx::nxgroup& nxgroup);
+	std::string getTableNXFieldContent(pninx::nxfield& nxfield);
 	std::string writeTitlesToStream(size_t column_count, size_t* columns_order, std::vector<std::string>& column_titles);
 	std::string writeDataToStream(size_t column_count, size_t* columns_order,
 			std::vector<std::vector<std::string>> table_data, size_t max_column_length);
@@ -94,12 +94,12 @@ private:
 	 *	\return Each value in NeXus filed
 	 */
 	template<typename T>
-	std::vector<std::string> readColumnContent(pninx::NXField& nxfield, const int precision)
+	std::vector<std::string> readColumnContent(pninx::nxfield& nxfield, const int precision)
 	{
 		std::vector<std::string> output;
 
 		shape_t nxfield_shape = nxfield.shape<shape_t>();
-		DArray<T> data( nxfield_shape );
+		darray<T> data( nxfield_shape );
 		nxfield.read(data);
 
 		size_t rank = nxfield.rank();
@@ -124,10 +124,10 @@ public:
 	virtual ~TableRule();
 
 	//fuse methods
-	virtual FSType getattr(pninx::NXObject &nxobject);
+	virtual FSType getattr(pninx::nxobject &nxobject);
 	//virtual std::vector<std::string> readdir(pninx::NXObject &nxobject);
-	virtual std::string read(pninx::NXObject &nxobject);
-	virtual size_t size(pninx::NXObject &nxobject);
+	virtual std::string read(pninx::nxobject &nxobject);
+	virtual size_t size(pninx::nxobject &nxobject);
 };
 
 #endif /* TABLERULE_H_ */

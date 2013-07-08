@@ -23,7 +23,7 @@
 #ifndef RULE_H_
 #define RULE_H_
 #include "enums.h"
-#include <pni/nx/NX.hpp>
+#include <pni/io/nx/nx.hpp>
 #include <stdio.h>
 #include <map>
 #include <iostream>
@@ -32,7 +32,8 @@
 #include <utility>
 #include <set>
 
-namespace pninx=pni::nx::h5;
+namespace pninx=pni::io::nx::h5;
+using namespace pni::core;
 
 /**
  *	Structure helps to pass data about subfiles from any Rule to Filter.
@@ -58,30 +59,30 @@ private:
 	/**
 	 *	Typedef pointer to function to store functions in a map.
 	 */
-	typedef std::string (Rule::*readNXField_t) (pninx::NXField& nxfield);
+	typedef std::string (Rule::*readNXField_t) (pninx::nxfield& nxfield);
 	/**
 	 *	This map is designed to call correct template function, due to the fact that we know the type we need to pass into template in runtime only.
 	 */
-	const std::map<TypeID, readNXField_t> ruleReadField;
+	const std::map<type_id_t, readNXField_t> ruleReadField;
 
-	std::string readNXFieldInt8 (pninx::NXField& nxfield);
-	std::string readNXFieldInt16 (pninx::NXField& nxfield);
-	std::string readNXFieldInt32 (pninx::NXField& nxfield);
-	std::string readNXFieldUInt8 (pninx::NXField& nxfield);
-	std::string readNXFieldUInt16 (pninx::NXField& nxfield);
-	std::string readNXFieldUInt32 (pninx::NXField& nxfield);
-	std::string readNXFieldFloat32 (pninx::NXField& nxfield);
-	std::string readNXFieldFloat64 (pninx::NXField& nxfield);
-	std::string readNXFieldFloat128 (pninx::NXField& nxfield);
-	std::string readNXFieldComplex32 (pninx::NXField& nxfield);
-	std::string readNXFieldComplex64 (pninx::NXField& nxfield);
-	std::string readNXFieldComplex128 (pninx::NXField& nxfield);
-	std::string readNXFieldString (pninx::NXField& nxfield);
-	std::string readNXFieldBinary (pninx::NXField& nxfield);
-	std::string readNXFieldBoolean (pninx::NXField& nxfield);
+	std::string readNXFieldInt8 (pninx::nxfield& nxfield);
+	std::string readNXFieldInt16 (pninx::nxfield& nxfield);
+	std::string readNXFieldInt32 (pninx::nxfield& nxfield);
+	std::string readNXFieldUInt8 (pninx::nxfield& nxfield);
+	std::string readNXFieldUInt16 (pninx::nxfield& nxfield);
+	std::string readNXFieldUInt32 (pninx::nxfield& nxfield);
+	std::string readNXFieldFloat32 (pninx::nxfield& nxfield);
+	std::string readNXFieldFloat64 (pninx::nxfield& nxfield);
+	std::string readNXFieldFloat128 (pninx::nxfield& nxfield);
+	std::string readNXFieldComplex32 (pninx::nxfield& nxfield);
+	std::string readNXFieldComplex64 (pninx::nxfield& nxfield);
+	std::string readNXFieldComplex128 (pninx::nxfield& nxfield);
+	std::string readNXFieldString (pninx::nxfield& nxfield);
+	std::string readNXFieldBinary (pninx::nxfield& nxfield);
+	std::string readNXFieldBoolean (pninx::nxfield& nxfield);
 
 	template<typename T>
-	std::string writeDimension(DArray<T>& data, shape_t shape, size_t rank, size_t depth=0)//,size_t offset=0)
+	std::string writeDimension(darray<T>& data, shape_t shape, size_t rank, size_t depth=0)//,size_t offset=0)
 	{
 		std::ostringstream stream;
 		for(size_t f=0;f<shape[depth];f++)//0, 1
@@ -107,10 +108,10 @@ private:
 	}
 
 	template<typename T>
-	std::string readNXFieldRule(pninx::NXField& nxfield)
+	std::string readNXFieldRule(pninx::nxfield& nxfield)
 	{
 		shape_t nxfield_shape = nxfield.shape<shape_t>();
-		DArray<T> data( nxfield_shape );
+		darray<T> data( nxfield_shape );
 		nxfield.read(data);
 		std::ostringstream stream;
 		size_t rank = nxfield.rank();
@@ -131,7 +132,7 @@ private:
 
 protected:
 	std::map<std::string, std::string> options; /*!< The list of options fetched from XML file. */
-	const std::map<TypeID, size_t> types_size; /*!<
+	const std::map<type_id_t, size_t> types_size; /*!<
 	 The list of max length of string representation of types used in pninx library.\n
 	 e.g. ostingstream(std::numeric_limits<int8_t>::min()).str().length() == 7 ;\n
 	 that means that biggest integer stored in int8_t variable can be printed out as 7 characters.\n
@@ -148,16 +149,16 @@ public:
 	void addOption(std::string key, std::string value);
 	void setOptions(std::map<std::string, std::string> input);
 
-	virtual subFiles createSubFiles(pninx::NXObject &nxobject);
+	virtual subFiles createSubFiles(pninx::nxobject &nxobject);
 	virtual void changeFSType(FSType type);
 	std::string getOptionValue(const char* option_name);
 	bool isValidOptions();
 
 	//methods for FUSE
-	virtual FSType getattr(pninx::NXObject &nxobject);
+	virtual FSType getattr(pninx::nxobject &nxobject);
 	//virtual std::vector<std::string> readdir(pninx::NXObject &nxobject);
-	virtual std::string read(pninx::NXObject &nxobject);
-	virtual size_t size(pninx::NXObject &nxobject);
+	virtual std::string read(pninx::nxobject &nxobject);
+	virtual size_t size(pninx::nxobject &nxobject);
 };
 
 #endif /* RULE_H_ */

@@ -32,8 +32,8 @@
 #include <string.h>
 #include <iostream>
 #include <pthread.h>
-#include <pni/nx/NX.hpp>
-#include <pni/utils/Types.hpp>
+#include <pni/io/nx/nx.hpp>
+#include <pni/core/types.hpp>
 #include "limits.h"
 
 #include "Filter/Filter.h"
