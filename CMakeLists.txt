@@ -44,7 +44,7 @@ if(DOXYGEN_FOUND)
 endif(DOXYGEN_FOUND)
 
 #---- CPack ------------------------------------------------------------------
-set(VERSION "1.0.4")
+set(VERSION "1.0.6")
 set(prefix ${CMAKE_INSTALL_PREFIX})
 
 if (UNIX)

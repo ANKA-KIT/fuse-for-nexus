@@ -293,6 +293,13 @@ size_t TableRule::size(pninx::nxobject &nxobject)
 	if(nxobject.object_type() == pni::io::nx::nxobject_type::NXFIELD)
 	{
 		output = ( ( pninx::nxfield ) nxobject).size();
+		shape_t shape = ( ( pninx::nxfield ) nxobject).shape<shape_t>();
+		size_t column_count = shape[0];
+		//size_t row_count = rank[1];
+		size_t multiplier = this->types_size.find(( (pninx::nxfield) nxobject).type_id())->second;
+		output *= multiplier;
+		output += column_count*128;
+		//todo: shortcoming!!! there might be more than 128 characters in column title, in theory....
 		//todo think how many characters there will be
 		output *= 2;
 	}
@@ -637,9 +644,9 @@ std::string TableRule::writeDataToStream(size_t column_count, size_t* columns_or
 			size_t col_order_index = columns_order[j];
 			try{
 				if(j%(column_count-1)==0 && j!=0)
-					tmp << table_data[col_order_index][i];
+					tmp << table_data[i][col_order_index];
 				else
-					tmp << table_data[col_order_index][i] << separator;
+					tmp << table_data[i][col_order_index] << separator;
 			}catch (...) {
 				tmp << '\0';
 			}

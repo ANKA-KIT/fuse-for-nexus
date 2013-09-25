@@ -46,6 +46,8 @@ mv "@CMAKE_CURRENT_BINARY_DIR@/_CPack_Packages/Linux/RPM/tmpBBroot" $RPM_BUILD_R
 #@CPACK_PACKAGING_INSTALL_PREFIX@/bin/smarxrm
 
 %changelog
+* Wed Sep 25 2013 Egor Yurchenko <egor.iurchenko@kit.edu> 1.0.6-1
+- Fixed single table_csv nexus object representation bug.
 * Tue Jun 18 2013 Egor Yurchenko <egor.iurchenko@kit.edu> 1.0.5-1
 - Added precision feature to the rule "table_csv". And fixed some stability bugs.
 * Thu Jun 13 2013 Egor Yurchenko <egor.iurchenko@kit.edu> 1.0.4-1
